@@ -1,0 +1,73 @@
+<html>
+<font size="8" color="green">Final test lab</font><br><br>
+Number of rows: <input type="text" id="t1" /><br><br>
+Number of cols: <input type="text" id="t2" /><br><br>
+
+<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+<button id="b2" onclick="addColumn()">Add Column</button>
+
+<button id="b3" onclick="addRow()">Add Row</button>
+
+<script language="javascript">
+
+	function generateTable() {
+		console.log('Entered in to the generate table function.')
+		let rowCount = document.getElementById('t1').value;
+		let colCount = document.getElementById('t2').value;
+
+		let table = document.createElement('table');
+		let tbody = document.createElement('tbody');
+
+		console.log('before the loop');
+		for (let i = 0; i < rowCount; i++) {
+			let row = document.createElement("tr");
+			for (let j = 0; j < colCount; j++) {
+				let cell = document.createElement("td");
+				let cellText = document.createTextNode(`Row ${i} Column ${j}`);
+				cell.appendChild(cellText);
+				row.appendChild(cell);
+			}
+			tbody.appendChild(row);
+		}
+
+		table.appendChild(tbody);
+
+		document.body.appendChild(table);
+		table.setAttribute("border", "2");
+		table.setAttribute("id", "table1");
+	}
+
+	function addRow() {
+		let table = document.getElementById('table1');
+		let tbody = table.firstChild;
+		let colCount = tbody.childNodes[0].childNodes.length;
+		let rowCount = tbody.childNodes.length;
+		let row = document.createElement("tr");
+		for (let j = 0; j < colCount; j++) {
+			let cell = document.createElement("td");
+			let cellText = document.createTextNode(`Row ${rowCount} Column ${j}`);
+			cell.appendChild(cellText);
+			row.appendChild(cell);
+		}
+		tbody.appendChild(row);
+
+	}
+
+	function addColumn() {
+		let table = document.getElementById('table1');
+		let tbody = table.firstChild;
+		let rows = tbody.childNodes;
+		let colCount = tbody.childNodes[0].childNodes.length;
+		let rowCount = tbody.childNodes.length;
+		for (let j = 0; j < rowCount; j++) {
+			let cell = document.createElement("td");
+			let cellText = document.createTextNode(`Row ${j} Column ${colCount}`);
+			cell.appendChild(cellText);
+			rows[j].appendChild(cell);
+		}
+		tbody.appendChild(rows);
+	}
+</script>
+
+</html>
